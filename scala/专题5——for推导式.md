@@ -1,9 +1,12 @@
-一、内部机制
+### 专题 5 —— for 推导式
 
-for 推导式的语法实际上是编译器提供的语法糖，它会调用容器方法 foreach、 map、 flatMap 以及 withFilter 方法。
+### 一、内部机制
 
-// 局部变量使用 map 传递
-```
+for 推导式的语法实际上是编译器提供的语法糖，它会调用容器方法 `foreach、 map、 flatMap` 以及 `withFilter` 方法。
+
+局部变量使用 map 传递
+
+```scala
 // 定义一组方法
 val filesHere = (new java.io.File(".")).listFiles
 def fileLines(file: java.io.File) = scala.io.Source.fromFile(file).getLines().toList
@@ -26,8 +29,9 @@ filesHere
   )
 ```
 
-// 对比前面的表达式
-```
+对比前面的表达式
+
+```scala
 for {
   s <- states
   c <- s
@@ -43,15 +47,16 @@ states flatMap  (_.toSeq withFilter (_.isLower) map { c =>
 ```
 
 
-二、其它容器
+### 二、其它容器
 
 除了这些明显的容器类型(List、Array 以及 Map)之外，for 推导式中还可以使用任何一种实现 foreach、map、flat 以及 withFilter 方法的类型。换言之，任何提供了这些方法的类型均可视为容器，而我们也可以在 for 推导式中使用这些 类型的实例。
 
 
-1.Option 容器
+#### Option 容器
 
-示例：
-```
+示例
+
+```scala
 def positive(i: Int): Option[Int] =   if (i > 0) Some(i) else None
 
 for {
@@ -65,7 +70,8 @@ for {
 ```
 
 注意如果只有一层判断也可以写成这样
-```
+
+```scala
 source match {
   case Some(s) =>
     println(s"Closing $fileName...")
@@ -79,25 +85,29 @@ for (s <- source) {
 }
 ```
 
-2.Either 容器
+#### Either 容器
 
 Either 容器默认是 right-biased，匹配时类似这种
-```
+
+```scala
 def map[B1](f: B => B1): Either[A, B1] = this match {
   case Right(b) => Right(f(b))
   case _        => this.asInstanceOf[Either[A, B1]]
 }
 ```
-可以使用 left 方法，将其转换为 LeftProjection, 时类似这种
-``` 
+
+可以使用 left 方法，将其转换为 LeftProjection, 类似这种
+
+```scala
 def map[A1](f: A => A1): Either[A1, B] = e match {
   case Left(a) => Left(f(a))
   case _       => e.asInstanceOf[Either[A1, B]]
 }
 ```
 
-示例：
-```
+示例
+
+```scala
 def positive(i: Int): Either[String,Int] =
   if (i > 0) Right(i) else Left(s"nonpositive number $i")
 
@@ -112,8 +122,9 @@ println(r) //  Left(nonpositive number -5)
 //在第二步之后，后续都是返回 Left("nonpositive number -5")
 ```
 
-示例：
-```
+示例
+
+```scala
 def addInts2(s1: String, s2: String): Either[NumberFormatException,Int] = 
   try { 
     Right(s1.toInt + s2.toInt)
@@ -126,11 +137,11 @@ println(addInts2("1", "x"))
 println(addInts2("x", "2"))
 ```
 
-3.Try 容器
+#### Try 容器
 
 类似于 Either，只不过其 Left 是固定的 Throwble 类型
 
-```
+```scala
 def positive(i: Int): Try[Int] = Try {
   assert(i > 0, s"nonpositive number $i")
   i
@@ -145,8 +156,9 @@ var r = for {
 println(r) // Failure(java.lang.AssertionError: assertion failed: nonpositive number -5)
 ```
 
-Try 的 apply 方法的实现如下：
-```
+Try 的 apply 方法的实现如下
+
+```scala
 object Try {
   /** Constructs a `Try` using the by-name parameter.  This
    * method will ensure any non-fatal exception is caught and a
@@ -158,4 +170,3 @@ object Try {
     }
 }
 ```
-
