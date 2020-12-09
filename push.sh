@@ -1,3 +1,3 @@
 git add .
-git commit -m "optimization" --amend
+git commit -m "doc: update"
 git push --force
