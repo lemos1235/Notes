@@ -1,16 +1,20 @@
-name: sphinx
+name: CI
 
 on:
   push:
     branches: [ master ]
 
 jobs:
-  build:
+  doc:
     name: Sphinx Pages
     runs-on: ubuntu-latest
     steps:
-      - uses: seanzhengw/sphinx-pages@master
-        id: sphinx-pages
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          create_readme: true
+        - name: Checkout
+          uses: actions/checkout@master
+
+        - name: vuepress-deploy
+          uses: jenkey2011/vuepress-deploy@master
+          env:
+            ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+            BUILD_SCRIPT: yarn && yarn build
+            BUILD_DIR: blog/.vuepress/dist/
