@@ -1,4 +1,8 @@
-on: [push]
+name: sphinx
+
+on:
+  push:
+    branches: [ master ]
 
 jobs:
   build:
