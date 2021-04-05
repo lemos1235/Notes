@@ -9,7 +9,7 @@ let s = String::from("hello world");
 let hello = &s[0..5];
 let world = &s[6..11];
 ```
-[!引用部分 String 的字符串 slice](https://rust-lang.budshome.com/img/trpl04-06.svg)
+![引用部分 String 的字符串 slice](https://rust-lang.budshome.com/img/trpl04-06.svg)
 
 > 注意：字符串 slice range 的索引必须位于有效的 UTF-8 字符边界内，如果尝试从一个多字节字符的中间位置创建字符串 slice，则程序将会因错误而退出。
 
