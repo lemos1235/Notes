@@ -8,6 +8,7 @@
 	- [查询](./mysql/03.查询.md)
 	- [EXPLAIN](./mysql/04.EXPLAIN.md)
 
+
 ## Scala
 
 - [Scala](./scala/README.md)
@@ -21,14 +22,21 @@
 	- [面向对象——类的层级关系](./scala/08.面向对象——类的层级关系.md)
 	- [Trait](./scala/09.Trait.md)
 	- [包管理](./scala/10.包管理.md)
+
+### 杂记
+
 	- [杂记1](./scala/杂记1——基础概念.md)
 	- [杂记2](./scala/杂记2——函数式.md)
 	- [杂记3](./scala/杂记3——类.md)
-	- [专题1](./scala/专题1——模式匹配.md)
-	- [专题2](./scala/专题2——抽象成员.md)
-	- [专题3](./scala/专题3——提取器.md)
-	- [专题4](./scala/专题4——隐式.md)
-	- [专题5](./scala/专题5——for推导式.md)
+
+### 专题部分
+
+	- [模式匹配](./scala/专题1——模式匹配.md)
+	- [抽象成员](./scala/专题2——抽象成员.md)
+	- [提取器](./scala/专题3——提取器.md)
+	- [隐式](./scala/专题4——隐式.md)
+	- [for推导式](./scala/专题5——for推导式.md)
+
 
 ## Rust
 
@@ -45,6 +53,10 @@
 	- [Trait](./rust/10.Trait.md)
 	- [智能指针](./rust/11.智能指针.md)
 	- [线程](./rust/12.线程.md)
+
+
+### 专题部分
+
 	- [引用与借用](./rust/专题1——引用与借用.md)
 	- [Slices](./rust/专题2——Slices.md)
 	- [字符串](./rust/专题3——字符串.md)
